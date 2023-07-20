@@ -1,0 +1,7 @@
+{
+  "name": "Lisen",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
