@@ -1,24 +1,93 @@
+
 #container {
+  display: flex;
+  justify-content: center; /* Alineación horizontal al centro */
+  /* align-items: center; Alineación vertical al centro */
+  /* Opcional: Si deseas que ocupe toda la pantalla puedes añadir las siguientes propiedades */
+  width: 100vw;
+  padding-top: 50px;
+  /* height: 100vh; */
+}
+
+
+ion-fab-button {
+  height: 100px;
+  width: 100px;
+
+}
+
+#micIcon{
+  height: 50px;
+  width: 50px;
+}
+
+.title{
+  color: white;
+}
+
+.center{
   text-align: center;
+}
+
+.keywords-container{
+  margin-left: 60px;
+  margin-right: 60px;
+  background-color: rgb(34, 34, 34);
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+/* Estilos para el círculo */
+.circle {
   position: absolute;
+
+
+  width: 100px;
+  height: 100px;
+  background-color: rgb(255, 95, 122);
+  color: white;
+  text-align: center;
+  line-height: 100px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 50%;
+  font-size: 1.3rem;
+}
+
+.circle:hover {
+  cursor: pointer;
+}
+
+/* Efecto de sombra */
+.circle::after, .circle::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
   left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: -1;
+  animation: grow 1s ease-in-out infinite;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.circle::after {
+  background: rgba(255, 95, 122, 0.4);
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  color: #8c8c8c;
-  margin: 0;
+.circle::before {
+  background: rgba(255, 95, 122, 0.6);
+  animation-delay: -0.5s;
 }
 
-#container a {
-  text-decoration: none;
+@keyframes grow {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8, 1.8);
+    opacity: 0;
+  }
 }
