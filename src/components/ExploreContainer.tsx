@@ -9,15 +9,67 @@ import {
 } from "@ionic/react";
 import "./ExploreContainer.css";
 import { add, micOutline, mic, close } from "ionicons/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ContainerProps {}
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [keywords, setKeywords] = useState<string[]>([]);
+
+  const addKeyword = (key: string) => {
+    setKeywords([...keywords, key]);
+  };
+
+  useEffect(() => {
+    console.log(keywords);
+  }, [keywords]);
 
   return (
     <div>
+      <IonAlert
+        isOpen={isOpen}
+        header="Edit keyword:"
+        subHeader="Alejandro"
+        inputs={[
+          {
+            placeholder: "Alejandro",
+          },
+        ]}
+        buttons={["OK"]}
+      ></IonAlert>
+
+      <IonAlert
+        isOpen={isOpenAdd}
+        trigger="add-alert"
+        header="Add keyword:"
+        inputs={[
+          {
+            placeholder: "Keyword",
+            name: "keyword",
+            type: "text",
+          },
+        ]}
+        buttons={[
+          {
+            text: "Cancel",
+            role: "cancel",
+            handler: () => {
+              console.log("Alert canceled");
+            },
+          },
+          {
+            text: "OK",
+            role: "confirm",
+            handler: (alertData) => {
+              addKeyword(alertData?.keyword);
+            },
+          },
+        ]}
+      ></IonAlert>
+
       <div id="container">
         <IonFabButton>
           <IonIcon icon={mic} id="micIcon"></IonIcon>
@@ -26,26 +78,21 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
       <div className="center">
         <h1 className="title">Keywords:</h1>
         <div className="keywords-container">
-          <IonChip id="present-alert">
-            <IonLabel onClick={() => setIsOpen(true)}>Alejandro</IonLabel>
-            <IonIcon icon={close}></IonIcon>
-          </IonChip>
-          <IonAlert
-            isOpen={isOpen}
-            trigger="present-alert"
-            header="Edit keyword:"
-            subHeader="Alejandro"
-            inputs={[
-              {
-                placeholder: "Alejandro",
-              },
-            ]}
-            buttons={["OK"]}
-          ></IonAlert>
+          {keywords.map((keyword, index) => (
+            <IonChip key={index}>
+              <IonLabel onClick={() => setIsOpen(true)}>{keyword}</IonLabel>
+              <IonIcon icon={close}></IonIcon>
+            </IonChip>
+          ))}
         </div>
         <br />
-        <IonButton>
-          <IonIcon icon={add}></IonIcon>
+        <IonButton id="add-alert">
+          <IonIcon
+            icon={add}
+            onClick={() => {
+              setIsOpenAdd(true);
+            }}
+          ></IonIcon>
           &nbsp;Add
         </IonButton>
       </div>
