@@ -38,7 +38,23 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
             placeholder: "Alejandro",
           },
         ]}
-        buttons={["OK"]}
+        buttons={[
+          {
+            text: "Remove",
+            role: "cancel",
+            handler: () => {
+              setIsOpen(false);
+              console.log("Alert canceled");
+            },
+          },
+          {
+            text: "OK",
+            role: "confirm",
+            handler: () => {
+              setIsOpen(false);
+            },
+          },
+        ]}
       ></IonAlert>
 
       <IonAlert
@@ -79,9 +95,8 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
         <h1 className="title">Keywords:</h1>
         <div className="keywords-container">
           {keywords.map((keyword, index) => (
-            <IonChip key={index}>
-              <IonLabel onClick={() => setIsOpen(true)}>{keyword}</IonLabel>
-              <IonIcon icon={close}></IonIcon>
+            <IonChip onClick={() => {setIsOpen(true); console.log('alsdfkj')}} key={index}>
+              <IonLabel>{keyword}</IonLabel>
             </IonChip>
           ))}
         </div>
